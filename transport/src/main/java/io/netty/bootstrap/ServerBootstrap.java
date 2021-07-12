@@ -121,6 +121,7 @@ public class ServerBootstrap extends AbstractBootstrap<ServerBootstrap, ServerCh
 
     /**
      * Set the {@link ChannelHandler} which is used to serve the request for the {@link Channel}'s.
+     * 设置用于为 Channel 的请求提供服务的 ChannelHandler。
      */
     public ServerBootstrap childHandler(ChannelHandler childHandler) {
         this.childHandler = ObjectUtil.checkNotNull(childHandler, "childHandler");

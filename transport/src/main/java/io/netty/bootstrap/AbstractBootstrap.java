@@ -169,6 +169,7 @@ public abstract class AbstractBootstrap<B extends AbstractBootstrap<B, C>, C ext
     /**
      * Allow to specify a {@link ChannelOption} which is used for the {@link Channel} instances once they got
      * created. Use a value of {@code null} to remove a previous set {@link ChannelOption}.
+     * 允许指定一个 ChannelOption，一旦它们被创建，它就用于 Channel 实例。 使用 null 值删除先前设置的 ChannelOption
      */
     public <T> B option(ChannelOption<T> option, T value) {
         ObjectUtil.checkNotNull(option, "option");
@@ -307,6 +308,8 @@ public abstract class AbstractBootstrap<B extends AbstractBootstrap<B, C>, C ext
     final ChannelFuture initAndRegister() {
         Channel channel = null;
         try {
+            // 创建一个 channel，channel 的类型由最初赋给ServerBootstrap的 Channel 类型决定
+            // 通过反射（ReflectiveChannelFactory）获取到新的 channel 对象
             channel = channelFactory.newChannel();
             init(channel);
         } catch (Throwable t) {

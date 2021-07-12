@@ -53,12 +53,14 @@ public final class EchoServer {
         EventLoopGroup workerGroup = new NioEventLoopGroup();
         final EchoServerHandler serverHandler = new EchoServerHandler();
         try {
-            ServerBootstrap b = new ServerBootstrap();
-            b.group(bossGroup, workerGroup)
+            ServerBootstrap b = new ServerBootstrap();  // netty 提供的辅助类，用于更方便的启动 ServerChannel
+            b.group(bossGroup, workerGroup)  // set parentGroup、childGroup
+             // 将 NioServerSocketChannel.class 即类信息封装进ServerBootstrap的属性channelFactory，
+             // 后续可通过反射获得NioServerSocketChannel实例
              .channel(NioServerSocketChannel.class)
-             .option(ChannelOption.SO_BACKLOG, 100)
+             .option(ChannelOption.SO_BACKLOG, 100)  // ChannelOption 用于设置 channel 的相关属性
              .handler(new LoggingHandler(LogLevel.INFO))
-             .childHandler(new ChannelInitializer<SocketChannel>() {
+             .childHandler(new ChannelInitializer<SocketChannel>() {  // 设置 Handler，用于处理请求
                  @Override
                  public void initChannel(SocketChannel ch) throws Exception {
                      ChannelPipeline p = ch.pipeline();

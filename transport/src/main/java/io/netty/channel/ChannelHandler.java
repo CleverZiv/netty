@@ -208,6 +208,14 @@ public interface ChannelHandler {
      * <p>
      * This annotation is provided for documentation purpose, just like
      * <a href="http://www.javaconcurrencyinpractice.com/annotations/doc/">the JCIP annotations</a>.
+     *
+     * 表示注解的ChannelHandler的同一个实例 可以多次添加到一个或多个 ChannelPipelines
+     * 没有竞争条件。
+     * 如果没有指定这个注解，你必须创建一个新的处理程序，每次将它添加到管道时的实例，因为它没有共享
+     * 状态，例如成员变量。
+     *
+     *   提供此注释用于文档标识的目的，就像
+     *   <a href="http://www.javaconcurrencyinpractice.com/annotations/doc/">JCIP 注释</a>。
      */
     @Inherited
     @Documented
